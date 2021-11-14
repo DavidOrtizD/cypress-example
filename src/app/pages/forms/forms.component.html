@@ -1,0 +1,164 @@
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-12">
+      <form [formGroup] = "cypressForm">
+        <div class="mb-3">
+          <label for="userName" class="form-label">Name</label>
+          <input type="text" formControlName="userName" class="form-control" id="userName">
+        </div>
+        <div class="mb-3">
+          <label for="verificationCode" class="form-label">Verification Code</label>
+          <input type="text" class="form-control" formControlName="verificationCode" id="verificationCode" maxlength="6">
+          <div class="m-4 border border-black d-flex justify-content-center align-items-center">
+            <p class="fs-1 m-0">
+              {{generatedCode}}
+            </p>
+          </div>
+        </div>
+        <div class="text-center">
+          <button type="submit" class="btn btn-primary" (click) = "openQuiz()" [disabled] = "!cypressForm.valid"  data-bs-toggle="modal" data-bs-target="#questionaryModal">Open Questionary</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+<!-- Quiz Modal -->
+<div class="modal fade" id="questionaryModal" tabindex="-1" aria-labelledby="questionaryModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title text-center" id="questionaryModalLabel">{{userName}} Quick quiz</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <form [formGroup] = "questionaryForm">
+        <div class="modal-body">
+          <div class="mb-3 form-check p-0">
+            <p class="m-0">
+              What browser is used when we run cypress in command line?
+            </p>
+            <div class="mx-3 px-2">
+              <input type="radio" class="form-check-input" formControlName="question1" value = "chrome" id="chromeRadio">
+              <label class="form-check-label" for="chromeRadio">Chrome</label>
+            </div>
+            <div class="mx-3 px-2">
+              <input type="radio" class="form-check-input" formControlName="question1" value = "explorer" id="explorerRadio">
+              <label class="form-check-label" for="explorerRadio">Explorer</label>
+            </div>
+            <div class="mx-3 px-2">
+              <input type="radio" class="form-check-input" formControlName="question1" value = "elektron" id="elektronRadio">
+              <label class="form-check-label" for="elektronRadio">Elektron</label>
+            </div>
+          </div> 
+          <div class="mb-3 form-check p-0">
+            <p class="m-0">
+              Do we run the browser in headless mode when we run cypress thru command line?
+            </p>
+            <div class="mx-3 px-2">
+              <input type="radio" class="form-check-input" formControlName="question2" value = "yes" id="headlessRadioYes">
+              <label class="form-check-label" for="headlessRadioYes">Yes</label>
+            </div>
+            <div class="mx-3 px-2">
+              <input type="radio" class="form-check-input" formControlName="question2" value = "no" id="headlessRadioNo">
+              <label class="form-check-label" for="headlessRadioNo">No</label>
+            </div>
+          </div> 
+          <div class="mb-3 form-check p-0">
+            <p class="m-0">
+              Where do we put our custom configurations?
+            </p>
+            <div class="mx-3 px-2">
+              <input type="radio" class="form-check-input" formControlName="question3" value = "package.json" id="configRadio1">
+              <label class="form-check-label" for="configRadio1">package.json</label>
+            </div>
+            <div class="mx-3 px-2">
+              <input type="radio" class="form-check-input" formControlName="question3" value = "cypress.json" id="configRadio2">
+              <label class="form-check-label" for="configRadio2">cypress.json</label>
+            </div>
+            <div class="mx-3 px-2">
+              <input type="radio" class="form-check-input" formControlName="question3" value = "index.js" id="configRadio3">
+              <label class="form-check-label" for="configRadio3">index.js</label>
+            </div>
+          </div> 
+          <div class="mb-3 form-check p-0">
+            <p class="m-0">
+              What selectors does cypress use?
+            </p>
+            <div class="mx-3 px-2">
+              <input type="radio" class="form-check-input" formControlName="question4" value = "css" id="selectorsRadio1">
+              <label class="form-check-label" for="selectorsRadio1">CSS selectors</label>
+            </div>
+            <div class="mx-3 px-2">
+              <input type="radio" class="form-check-input" formControlName="question4" value = "tag" id="selectorsRadio2">
+              <label class="form-check-label" for="selectorsRadio2">Tag selectors</label>
+            </div>
+            <div class="mx-3 px-2">
+              <input type="radio" class="form-check-input" formControlName="question4" value = "xpath" id="selectorsRadio3">
+              <label class="form-check-label" for="selectorsRadio3">Xpath selectors</label>
+            </div>
+          </div>
+          <div class="mb-3 form-check p-0">
+            <p class="m-0">
+              What does cypress use to work?
+            </p>
+            <div class="mx-3 px-2">
+              <input type="radio" class="form-check-input" formControlName="question5" value = "karma-jasmine" id="coreRadio1">
+              <label class="form-check-label" for="coreRadio1">Karma and Jasmine</label>
+            </div>
+            <div class="mx-3 px-2">
+              <input type="radio" class="form-check-input" formControlName="question5" value = "mocha-jasmine" id="coreRadio2">
+              <label class="form-check-label" for="coreRadio2">Mocha and Jasmine</label>
+            </div>
+            <div class="mx-3 px-2">
+              <input type="radio" class="form-check-input" formControlName="question5" value = "jest-jasmine" id="coreRadio3">
+              <label class="form-check-label" for="coreRadio3">Jest and Jasmine</label>
+            </div>
+          </div>  
+          <div class="mb-3 form-check p-0">
+            <p class="m-0">
+              Does Cypess has child window support?
+            </p>
+            <div class="mx-3 px-2">
+              <input type="radio" class="form-check-input" formControlName="question6" value = "yes" id="windowRadio1">
+              <label class="form-check-label" for="windowRadio1">Yes</label>
+            </div>
+            <div class="mx-3 px-2">
+              <input type="radio" class="form-check-input" formControlName="question6" value = "no" id="windowRadio2">
+              <label class="form-check-label" for="windowRadio2">No</label>
+            </div>
+          </div>  
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-primary" (click) = "getResults()" data-bs-dismiss="modal" [disabled] = "!questionaryForm.valid" data-bs-toggle="modal" data-bs-target="#scoreModal">Get Results</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="scoreModal" tabindex="-1" aria-labelledby="scoreModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="scoreModalLabel">{{userName}} Quiz Results</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body text-center">
+        <p class="m-0">
+          Your total score is:
+        </p>
+        <span class="fs-1">
+          {{score}}
+        </span>
+        <p class="m-0">
+          {{resultsMessage}}
+        </p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
