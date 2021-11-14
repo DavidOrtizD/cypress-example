@@ -7,6 +7,18 @@
           <input type="text" formControlName="userName" class="form-control" id="userName">
         </div>
         <div class="mb-3">
+          <label for="userGender" class="form-label">Gender</label>
+          <select class="form-select" formControlName="userGender" id="userGender">
+            <option selected disabled value="">Choose...</option>
+            <option value="male">Male</option>
+            <option value="female">Female</option>
+            <option value="other">Other</option>
+          </select>
+          <div class="invalid-feedback">
+            Please select a valid state.
+          </div>
+        </div>
+        <div class="mb-3">
           <label for="verificationCode" class="form-label">Verification Code</label>
           <input type="text" class="form-control" formControlName="verificationCode" id="verificationCode" maxlength="6">
           <div class="m-4 border border-black d-flex justify-content-center align-items-center">
@@ -28,7 +40,7 @@
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title text-center" id="questionaryModalLabel">{{userName}} Quick quiz</h5>
+        <h5 class="modal-title text-center" id="questionaryModalLabel">{{userPrefix}} {{userName}} Quick quiz</h5>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <form [formGroup] = "questionaryForm">

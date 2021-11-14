@@ -13,6 +13,7 @@ export class FormsComponent implements OnInit {
   public maxCodeLength: number = 6;
   public score: number = 0;
   public userName: string = '';
+  public userPrefix: string = '';
   public resultsMessage: string = '';
 
   public cypressForm: FormGroup;
@@ -23,6 +24,7 @@ export class FormsComponent implements OnInit {
     
     this.cypressForm =  new FormGroup({
       userName: new FormControl('', Validators.required),
+      userGender: new FormControl('', Validators.required),
       verificationCode: new FormControl('', [Validators.maxLength(6), this.validateVerificationCode(this.generatedCode)]),
     });
 
@@ -85,7 +87,13 @@ export class FormsComponent implements OnInit {
   }
 
   public openQuiz() {
-   this.userName = this.cypressForm.controls['userName'].value;
+    this.userName = this.cypressForm.controls['userName'].value;
+    
+    if(this.cypressForm.controls['userGender'].value !== 'other'){
+      this.userPrefix = this.cypressForm.controls['userGender'].value == 'male' ? 'Mr.' : 'Mrs.';
+    } else {
+      this.userPrefix = '';
+    }
   }
 
   public getResults(): void {

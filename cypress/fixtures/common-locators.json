@@ -1,0 +1,10 @@
+{
+  "navigationSelectors":{
+    "quizLink": ".nav-link[href='/quiz']"
+  },
+  "quizSelectors" : {
+    "userNameInput": "#userName",
+    "userGenderInput": "#userGender",
+    "verificationCodeInput": "#verificationCode"
+  }
+}
